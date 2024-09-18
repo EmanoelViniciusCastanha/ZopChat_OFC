@@ -1,0 +1,86 @@
+.form-control {
+  color: aliceblue;
+  display: flex;
+  justify-content: center;
+}
+
+.form-login {
+  background-color: #222222;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.form-img {
+  background-color: #d9d9d9;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container-login {
+  background-color: red;
+}
+
+.container-titulo {
+  position: absolute;
+  margin: auto;
+  margin-top: 70px;
+  top: 0;
+}
+
+.user-logo {
+  width: 90%;
+  display: flex;
+}
+
+.user-name {
+  width: 55%;
+  margin-left: 5em;
+}
+
+.button-login {
+  padding: 12px 30px 12px 30px;
+  background-color: #3a53bf;
+  border: 0;
+  color: #ffff;
+  border-radius: 10px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.button-login:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.form-control-login {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  width: 500px;
+  color: white;
+}
+
+.form-control-login label {
+  margin-bottom: 0.5rem;
+}
+
+.form-control-login input,
+.form-control-login textarea,
+.form-control-login select {
+  padding: 15px 15px 15px 10px;
+  border-radius: 10px;
+}

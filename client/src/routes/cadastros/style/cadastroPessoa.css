@@ -1,0 +1,76 @@
+.container-cadastro-pessoa {
+  background-color: #222222;
+  height: 100vh;
+}
+
+.cadastro-user h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.cadastro-user {
+  color: white;
+}
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.form-control label {
+  margin-bottom: 0.5rem;
+}
+
+.form-control input,
+.form-control textarea,
+.form-control select {
+  padding: 15px 15px 15px 10px;
+  border-radius: 10px;
+}
+
+.titulo-cadastro-pessoa {
+  font-size: 40px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-align: center;
+  color: aliceblue;
+}
+
+.formulario-cadastro-pessoa {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.input-duplo {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+}
+
+.select-grupo {
+  width: 100%;
+}
+
+.box-input-cpf input,
+.box-input-cpf textarea {
+  padding: 15px 15px 15px 10px;
+  border-radius: 10px;
+}
+
+.box-input-cpf select {
+  padding: 14px 15px 14px 10px;
+  border-radius: 10px;
+}
+
+.box-input-cpf label {
+  margin-bottom: 0.5rem;
+}
+
+.box-input-cpf {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}

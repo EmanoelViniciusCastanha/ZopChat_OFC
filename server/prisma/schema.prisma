@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model conversa {
+  id               Int                @id(map: "conversa_pk") @default(autoincrement())
+  id_receptor      Int?
+  data_cadastro    DateTime           @default(now()) @db.Timestamptz(6)
+  id_pessoa        Int
+  id_grupo         Int?
+  grupo            grupo?             @relation(fields: [id_grupo], references: [id], map: "grupo_fk")
+  pessoa           pessoa             @relation(fields: [id_pessoa], references: [id], map: "pessoa_fk")
+  mensagem_grupo   mensagem_grupo[]
+  mensagem_privada mensagem_privada[]
+
+  @@unique([id_pessoa, id_grupo], map: "conversa_grupo_pessoa_uq")
+  @@unique([id_pessoa, id_receptor], map: "emissor_receptor_uq")
+}
+
+model grupo {
+  id             Int              @id(map: "grupo_pk") @default(autoincrement())
+  nome           String           @default(dbgenerated("200")) @db.VarChar
+  descricao      String?
+  conversa       conversa[]
+  grupos_pessoas grupos_pessoas[]
+}
+
+model grupos_pessoas {
+  id            Int      @id(map: "grupos_pessoas_pk") @default(autoincrement())
+  data_cadastro DateTime @default(now()) @db.Timestamptz(6)
+  id_pessoa     Int
+  id_grupo      Int
+  grupo         grupo    @relation(fields: [id_grupo], references: [id], map: "grupo_fk")
+  pessoa        pessoa   @relation(fields: [id_pessoa], references: [id], map: "pessoa_fk")
+
+  @@unique([id_pessoa, id_grupo], map: "grupo_pessoa_uq")
+}
+
+model mensagem_grupo {
+  id            Int      @id(map: "mensagem_grupo_pk") @default(autoincrement())
+  mensagem      String
+  data_cadastro DateTime @default(now()) @db.Timestamptz(6)
+  id_conversa   Int
+  id_pessoa     Int
+  conversa      conversa @relation(fields: [id_conversa], references: [id], map: "conversa_fk")
+  pessoa        pessoa   @relation(fields: [id_pessoa], references: [id], map: "pessoa_fk")
+}
+
+model mensagem_privada {
+  id            Int      @id(map: "mensagem_privada_pk") @default(autoincrement())
+  mensagem      String
+  data_cadastro DateTime @default(now()) @db.Timestamptz(6)
+  id_conversa   Int
+  id_pessoa     Int
+  conversa      conversa @relation(fields: [id_conversa], references: [id], map: "conversa_fk")
+  pessoa        pessoa   @relation(fields: [id_pessoa], references: [id], map: "pessoa_fk")
+}
+
+model pessoa {
+  id               Int                @id(map: "pessoa_pk") @default(autoincrement())
+  nome             String             @default(dbgenerated("200")) @db.VarChar
+  email            String             @unique(map: "email_uq") @default(dbgenerated("255")) @db.VarChar
+  senha            String             @db.VarChar
+  cpf              String             @unique(map: "cpf_uq") @default(dbgenerated("11")) @db.VarChar
+  data_cadastro    DateTime           @default(now()) @db.Timestamptz(6)
+  conversa         conversa[]
+  grupos_pessoas   grupos_pessoas[]
+  mensagem_grupo   mensagem_grupo[]
+  mensagem_privada mensagem_privada[]
+}

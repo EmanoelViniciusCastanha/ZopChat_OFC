@@ -1,0 +1,33 @@
+.container-home {
+  background-color: #222222;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.background-drop {
+  background-color: aliceblue;
+  height: 90%;
+  min-width: 15%;
+  max-height: 100%;
+  overflow: auto;
+  border-radius: 0px 0px 10px 10px;
+}
+
+.container-main {
+  display: flex;
+  height: 100%;
+}
+
+.img-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.img-logo {
+  width: auto;
+  height: 70%;
+}
+.nome-user::first-letter {
+  text-transform: uppercase;
+}
