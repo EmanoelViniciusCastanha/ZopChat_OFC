@@ -1,24 +1,24 @@
 import express from "express";
 import { AuthController } from "../controllers/auth/authController";
-import { GrupoController } from "../controllers/grupo/grupoController";
+import { Groups_Controller } from "../controllers/Groups/GroupController";
 const grupoRoutes = express.Router();
 
 grupoRoutes.get(
   "/grupo",
-  AuthController.verificaJWt,
-  GrupoController.findAllGrupos
+  AuthController.verify_JWT,
+  Groups_Controller.findAllGrupos
 );
 
 grupoRoutes.get(
   "/grupo/:id",
-  AuthController.verificaJWt,
-  GrupoController.findGrupoForid
+  AuthController.verify_JWT,
+  Groups_Controller.findGrupoForid
 );
 
 grupoRoutes.post(
   "/grupo",
-  AuthController.verificaJWt,
-  GrupoController.createGrupo
+  AuthController.verify_JWT,
+  Groups_Controller.createGrupo
 );
 
 export { grupoRoutes };

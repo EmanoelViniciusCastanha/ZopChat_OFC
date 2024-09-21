@@ -1,4 +1,4 @@
-.container-conversa {
+.container-Messages {
   background-color: #222222;
   height: 100vh;
 }
@@ -6,7 +6,7 @@
 li {
   color: black;
 }
-.container-conversa-modal {
+.container-Messages-modal {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,7 +24,7 @@ li {
   position: relative;
 }
 
-.conversa-dentro {
+.Messages-dentro {
   height: 90%;
   overflow-x: hidden;
 }

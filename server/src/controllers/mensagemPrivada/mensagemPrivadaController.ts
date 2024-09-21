@@ -9,7 +9,7 @@ export class MensagemPrivadaController {
       await prismaClient.mensagem_privada.create({
         data: {
           mensagem: IMensagem.mensagem,
-          id_conversa: IMensagem.idConversa,
+          id_Messages: IMensagem.idMessages,
           id_pessoa: IMensagem.idPessoa,
         },
       });
@@ -24,7 +24,7 @@ export class MensagemPrivadaController {
       const mensagem = await prismaClient.mensagem_privada.create({
         data: {
           mensagem: IMensagem.mensagem,
-          id_conversa: IMensagem.idConversa,
+          id_Messages: IMensagem.idMessages,
           id_pessoa: IMensagem.idPessoa,
         },
       });
@@ -33,7 +33,7 @@ export class MensagemPrivadaController {
         select: {
           id: true,
           data_cadastro: true,
-          id_conversa: true,
+          id_Messages: true,
           id_pessoa: true,
           mensagem: true,
           pessoa: {
@@ -56,13 +56,13 @@ export class MensagemPrivadaController {
         where: {
           OR: [
             {
-              conversa: {
+              Messages: {
                 id_pessoa: Number(idEmissor),
                 id_receptor: Number(idReceptor),
               },
             },
             {
-              conversa: {
+              Messages: {
                 id_pessoa: Number(idReceptor),
                 id_receptor: Number(idEmissor),
               },
@@ -73,7 +73,7 @@ export class MensagemPrivadaController {
           id: true,
           mensagem: true,
           data_cadastro: true,
-          id_conversa: true,
+          id_Messages: true,
           id_pessoa: true,
           pessoa: {
             select: {

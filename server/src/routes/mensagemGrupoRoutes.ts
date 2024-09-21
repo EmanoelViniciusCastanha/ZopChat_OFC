@@ -1,17 +1,17 @@
 import express from "express";
 import { AuthController } from "../controllers/auth/authController";
-import { MensagemGrupoController } from "../controllers/mensagemGrupo/mensagemGrupoController";
+import { groupMessagesController } from "../controllers/GroupMessages/groupMessagesController";
 
 const mensagemGrupoRoutes = express.Router();
 mensagemGrupoRoutes.get(
   "/mensagens/grupo/:idGrupo",
-  AuthController.verificaJWt,
-  MensagemGrupoController.findMensagemUser
+  AuthController.verify_JWT,
+  groupMessagesController.findMensagemUser
 );
 
 mensagemGrupoRoutes.post(
   "/mensagem/grupo",
-  AuthController.verificaJWt,
-  MensagemGrupoController.createMensagem
+  AuthController.verify_JWT,
+  groupMessagesController.createMensagem
 );
 export { mensagemGrupoRoutes };

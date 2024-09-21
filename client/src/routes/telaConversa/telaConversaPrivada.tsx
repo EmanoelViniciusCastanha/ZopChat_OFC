@@ -9,7 +9,7 @@ type mensagens = {
   id: number;
   mensagem: string;
   data_cadastro: Date;
-  idConversa: number;
+  idMessages: number;
   id_pessoa: number;
   pessoa: {
     nome: string;
@@ -22,13 +22,13 @@ type pessoa = {
   email: string;
 };
 
-const TelaConversaPrivada = () => {
-  const { idConversa, idReceptor } = useParams();
+const TelaMessagesPrivada = () => {
+  const { idMessages, idReceptor } = useParams();
   const [mensagensBox, setMensagensBox] = useState<mensagens>([]);
   const [pessoa, setPessoa] = useState<pessoa>();
   const [mensagem, setMensagem] = useState<string>("");
   const auth = useContext(AuthContext);
-  const refConversation = useRef(null);
+  const refMessagestion = useRef(null);
 
   const getUser = async () => {
     const pessoa = await webFetch.get(`/pessoa/${idReceptor}`);
@@ -50,7 +50,7 @@ const TelaConversaPrivada = () => {
     try {
       socket.emit("mensagemPrivada", {
         mensagem: mensagem,
-        idConversa: Number(idConversa),
+        idMessages: Number(idMessages),
         idPessoa: auth.user?.id,
         idReceptor: Number(idReceptor),
       });
@@ -69,8 +69,8 @@ const TelaConversaPrivada = () => {
     function onMsgEvent(data: any) {
       setMensagensBox((previous) => [...previous, data]);
       setTimeout(() => {
-        if (refConversation.current) {
-          const divScroll = refConversation.current as HTMLDivElement;
+        if (refMessagestion.current) {
+          const divScroll = refMessagestion.current as HTMLDivElement;
           divScroll.scrollTo({
             top: divScroll.scrollHeight,
             behavior: "smooth",
@@ -84,7 +84,7 @@ const TelaConversaPrivada = () => {
     socket.emit("userReceptor", {
       idUser: auth.user?.id,
       idReceptor: Number(idReceptor),
-      idConversa: Number(idConversa),
+      idMessages: Number(idMessages),
     });
 
     socket.on("mensagemPrivada", onMsgEvent);
@@ -97,14 +97,14 @@ const TelaConversaPrivada = () => {
 
   return (
     <>
-      <div className="container-conversa">
+      <div className="container-Messages">
         <NavBar />
         <div className="titulo">
           <h2>{pessoa?.nome}</h2>
         </div>
-        <div className="container-conversa-modal">
+        <div className="container-Messages-modal">
           <div className="modal">
-            <div className="conversa-dentro" ref={refConversation}>
+            <div className="Messages-dentro" ref={refMessagestion}>
               {mensagensBox.map((value, index) => {
                 return (
                   <div
@@ -152,4 +152,4 @@ const TelaConversaPrivada = () => {
   );
 };
 
-export default TelaConversaPrivada;
+export default TelaMessagesPrivada;

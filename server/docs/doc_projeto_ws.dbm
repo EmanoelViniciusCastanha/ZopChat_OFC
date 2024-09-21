@@ -115,7 +115,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</label>
 </relationship>
 
-<table name="conversa" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
+<table name="Messages" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
 	<schema name="public"/>
 	<position x="1120" y="1000"/>
 	<column name="id" not-null="true">
@@ -127,7 +127,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="data_cadastro" not-null="true" default-value="CURRENT_TIMESTAMP">
 		<type name="timestamptz" length="0"/>
 	</column>
-	<constraint name="conversa_pk" type="pk-constr" table="public.conversa">
+	<constraint name="Messages_pk" type="pk-constr" table="public.Messages">
 		<columns names="id" ref-type="src-columns"/>
 	</constraint>
 
@@ -142,26 +142,26 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</customidxs>
 </table>
 
-<relationship name="pessoa_has_many_conversa" type="rel1n" layers="0"
+<relationship name="pessoa_has_many_Messages" type="rel1n" layers="0"
 	 src-col-pattern="{sc}_{st}"
 	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
 	 src-fk-pattern="{st}_fk"
 	 custom-color="#6ed102"
 	 src-table="public.pessoa"
-	 dst-table="public.conversa"
+	 dst-table="public.Messages"
 	 src-required="true" dst-required="false">
 	<label ref-type="name-label">
 		<position x="2.57285" y="0.908736"/>
 	</label>
 </relationship>
 
-<relationship name="grupo_has_many_conversa" type="rel1n" layers="0"
+<relationship name="grupo_has_many_Messages" type="rel1n" layers="0"
 	 src-col-pattern="{sc}_{st}"
 	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
 	 src-fk-pattern="{st}_fk"
 	 custom-color="#694b60"
 	 src-table="public.grupo"
-	 dst-table="public.conversa"
+	 dst-table="public.Messages"
 	 src-required="false" dst-required="false"/>
 
 <table name="mensagem_privada" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
@@ -181,22 +181,22 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 
 	<customidxs object-type="column">
-		<object name="id_conversa" index="3"/>
+		<object name="id_Messages" index="3"/>
 		<object name="id_pessoa" index="4"/>
 	</customidxs>
 
 	<customidxs object-type="constraint">
-		<object name="conversa_fk" index="1"/>
+		<object name="Messages_fk" index="1"/>
 		<object name="pessoa_fk" index="2"/>
 	</customidxs>
 </table>
 
-<relationship name="conversa_has_many_mensagem_privada" type="rel1n" layers="0"
+<relationship name="Messages_has_many_mensagem_privada" type="rel1n" layers="0"
 	 src-col-pattern="{sc}_{st}"
 	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
 	 src-fk-pattern="{st}_fk"
 	 custom-color="#fb9245"
-	 src-table="public.conversa"
+	 src-table="public.Messages"
 	 dst-table="public.mensagem_privada"
 	 src-required="true" dst-required="false"/>
 
@@ -226,22 +226,22 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 
 	<customidxs object-type="column">
-		<object name="id_conversa" index="3"/>
+		<object name="id_Messages" index="3"/>
 		<object name="id_pessoa" index="4"/>
 	</customidxs>
 
 	<customidxs object-type="constraint">
-		<object name="conversa_fk" index="1"/>
+		<object name="Messages_fk" index="1"/>
 		<object name="pessoa_fk" index="2"/>
 	</customidxs>
 </table>
 
-<relationship name="conversa_has_many_mensagem_grupo" type="rel1n" layers="0"
+<relationship name="Messages_has_many_mensagem_grupo" type="rel1n" layers="0"
 	 src-col-pattern="{sc}_{st}"
 	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
 	 src-fk-pattern="{st}_fk"
 	 custom-color="#e81ca5"
-	 src-table="public.conversa"
+	 src-table="public.Messages"
 	 dst-table="public.mensagem_grupo"
 	 src-required="true" dst-required="false"/>
 
@@ -258,11 +258,11 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<columns names="id_pessoa,id_grupo" ref-type="src-columns"/>
 </constraint>
 
-<constraint name="conversa_grupo_pessoa_uq" type="uq-constr" table="public.conversa">
+<constraint name="Messages_grupo_pessoa_uq" type="uq-constr" table="public.Messages">
 	<columns names="id_pessoa,id_grupo" ref-type="src-columns"/>
 </constraint>
 
-<constraint name="emissor_receptor_uq" type="uq-constr" table="public.conversa">
+<constraint name="emissor_receptor_uq" type="uq-constr" table="public.Messages">
 	<columns names="id_pessoa,id_receptor" ref-type="src-columns"/>
 </constraint>
 

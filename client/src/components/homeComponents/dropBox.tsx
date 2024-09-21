@@ -15,24 +15,24 @@ const DropDown = (props: IProps) => {
   const navegation = useNavigate();
   const auth = useContext(AuthContext);
 
-  const postConversaGrupo = async () => {
+  const postMessagesGrupo = async () => {
     const storageData = localStorage.getItem("AuthAccess");
     try {
-      const mensagens = await webFetch.post("/conversa/grupo", {
+      const mensagens = await webFetch.post("/Messages/grupo", {
         access: storageData,
         idGrupo: Number(props.idGrupo),
       });
       const mensagemData = mensagens.data;
-      navegation(`/conversa/${mensagemData.id}/grupo/${props.idGrupo}`);
+      navegation(`/Messages/${mensagemData.id}/grupo/${props.idGrupo}`);
     } catch (e) {
       console.log(e);
     }
   };
 
-  const postConversaPrivada = async (idReceptor: number) => {
+  const postMessagesPrivada = async (idReceptor: number) => {
     const storageData = localStorage.getItem("AuthAccess");
     try {
-      const mensagens = await webFetch.post("/conversa/privada", {
+      const mensagens = await webFetch.post("/Messages/privada", {
         access: storageData,
         idReceptor: idReceptor,
       });
@@ -44,7 +44,7 @@ const DropDown = (props: IProps) => {
       } else {
         changeUser = mensagemData.id_receptor;
       }
-      navegation(`/conversa/${mensagemData.id}/privada/receptor/${changeUser}`);
+      navegation(`/Messages/${mensagemData.id}/privada/receptor/${changeUser}`);
     } catch (e) {
       console.log(e);
     }
@@ -56,7 +56,7 @@ const DropDown = (props: IProps) => {
         <button className="nome-grupo" onClick={() => setOpen((old) => !old)}>
           {props.grupoNome}
         </button>
-        <button className="conversa" onClick={postConversaGrupo}>
+        <button className="Messages" onClick={postMessagesGrupo}>
           <img className="icone" src="../../../img/comente.png" alt="logo" />
         </button>
       </div>
@@ -72,7 +72,7 @@ const DropDown = (props: IProps) => {
                     <li className="menu-item" key={user.id}>
                       <button
                         className="menu-nome-user"
-                        onClick={() => postConversaPrivada(user.id)}
+                        onClick={() => postMessagesPrivada(user.id)}
                       >
                         {user.nome}
                       </button>

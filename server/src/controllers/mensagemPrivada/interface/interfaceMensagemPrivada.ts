@@ -1,5 +1,5 @@
 export interface IMensagemPrivada {
   idPessoa: number;
-  idConversa: number;
+  idMessages: number;
   mensagem: string;
 }

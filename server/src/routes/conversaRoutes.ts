@@ -1,19 +1,19 @@
 import express from "express";
 import { AuthController } from "../controllers/auth/authController";
-import { ConversaController } from "../controllers/conversa/conversaController";
+import { Messages_Controller } from "../controllers/Messages/MessagesController";
 
-const conversaRoutes = express.Router();
+const MessagesRoutes = express.Router();
 
-conversaRoutes.post(
-  "/conversa/grupo",
-  AuthController.verificaJWt,
-  ConversaController.findConversaUserGrupo
+MessagesRoutes.post(
+  "/Messages/grupo",
+  AuthController.verify_JWT,
+  Messages_Controller.find_group_Messages
 );
 
-conversaRoutes.post(
-  "/conversa/privada",
-  AuthController.verificaJWt,
-  ConversaController.findConversaUserPrivada
+MessagesRoutes.post(
+  "/Messages/privada",
+  AuthController.verify_JWT,
+  Messages_Controller.findMessagesUserPrivada
 );
 
-export { conversaRoutes };
+export { MessagesRoutes };

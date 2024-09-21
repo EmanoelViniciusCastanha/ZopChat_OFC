@@ -1,12 +1,12 @@
 -- CreateTable
-CREATE TABLE "conversa" (
+CREATE TABLE "Messages" (
     "id" BIGSERIAL NOT NULL,
     "id_receptor" INTEGER,
     "data_cadastro" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "id_pessoa" INTEGER NOT NULL,
     "id_grupo" INTEGER,
 
-    CONSTRAINT "conversa_pk" PRIMARY KEY ("id")
+    CONSTRAINT "Messages_pk" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -33,7 +33,7 @@ CREATE TABLE "mensagem_grupo" (
     "id" BIGSERIAL NOT NULL,
     "mensagem" TEXT NOT NULL,
     "data_cadastro" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "id_conversa" BIGINT NOT NULL,
+    "id_Messages" BIGINT NOT NULL,
     "id_pessoa" INTEGER NOT NULL,
 
     CONSTRAINT "mensagem_grupo_pk" PRIMARY KEY ("id")
@@ -44,7 +44,7 @@ CREATE TABLE "mensagem_privada" (
     "id" BIGSERIAL NOT NULL,
     "mensagem" TEXT NOT NULL,
     "data_cadastro" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "id_conversa" BIGINT NOT NULL,
+    "id_Messages" BIGINT NOT NULL,
     "id_pessoa" INTEGER NOT NULL,
 
     CONSTRAINT "mensagem_privada_pk" PRIMARY KEY ("id")
@@ -66,10 +66,10 @@ CREATE TABLE "pessoa" (
 CREATE UNIQUE INDEX "cpf_uq" ON "pessoa"("cpf");
 
 -- AddForeignKey
-ALTER TABLE "conversa" ADD CONSTRAINT "grupo_fk" FOREIGN KEY ("id_grupo") REFERENCES "grupo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Messages" ADD CONSTRAINT "grupo_fk" FOREIGN KEY ("id_grupo") REFERENCES "grupo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "conversa" ADD CONSTRAINT "pessoa_fk" FOREIGN KEY ("id_pessoa") REFERENCES "pessoa"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Messages" ADD CONSTRAINT "pessoa_fk" FOREIGN KEY ("id_pessoa") REFERENCES "pessoa"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "grupos_pessoas" ADD CONSTRAINT "grupo_fk" FOREIGN KEY ("id_grupo") REFERENCES "grupo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -78,13 +78,13 @@ ALTER TABLE "grupos_pessoas" ADD CONSTRAINT "grupo_fk" FOREIGN KEY ("id_grupo") 
 ALTER TABLE "grupos_pessoas" ADD CONSTRAINT "pessoa_fk" FOREIGN KEY ("id_pessoa") REFERENCES "pessoa"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "mensagem_grupo" ADD CONSTRAINT "conversa_fk" FOREIGN KEY ("id_conversa") REFERENCES "conversa"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "mensagem_grupo" ADD CONSTRAINT "Messages_fk" FOREIGN KEY ("id_Messages") REFERENCES "Messages"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "mensagem_grupo" ADD CONSTRAINT "pessoa_fk" FOREIGN KEY ("id_pessoa") REFERENCES "pessoa"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "mensagem_privada" ADD CONSTRAINT "conversa_fk" FOREIGN KEY ("id_conversa") REFERENCES "conversa"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "mensagem_privada" ADD CONSTRAINT "Messages_fk" FOREIGN KEY ("id_Messages") REFERENCES "Messages"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "mensagem_privada" ADD CONSTRAINT "pessoa_fk" FOREIGN KEY ("id_pessoa") REFERENCES "pessoa"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import { pessoaRoutes } from "./pessoaRoutes";
 import { authRoutes } from "./authRoutes";
 import { grupoRoutes } from "./grupoRoutes";
-import { conversaRoutes } from "./conversaRoutes";
+import { MessagesRoutes } from "./MessagesRoutes";
 import { mensagemGrupoRoutes } from "./mensagemGrupoRoutes";
 import { mensagemPrivadaRoutes } from "./mensagemPrivadaRoutes";
 
@@ -16,7 +16,7 @@ const routes = (app: any) => {
     pessoaRoutes,
     authRoutes,
     grupoRoutes,
-    conversaRoutes,
+    MessagesRoutes,
     mensagemGrupoRoutes,
     mensagemPrivadaRoutes
   );

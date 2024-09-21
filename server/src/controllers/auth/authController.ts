@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import bcrypt from "bcrypt";
-import { PessoaController } from "../pessoa/pessoaController";
+import { PessoaController } from "../pessoa/peopleController";
 import jwt from "jsonwebtoken";
 import * as dotenv from "dotenv";
 import { ICustomRequest, IUser } from "./interfaces/interfacePayload";
@@ -11,19 +11,19 @@ export class AuthController {
   static async login(req: Request, res: Response) {
     const { email, senha } = req.body;
     try {
-      const verificaEmail = await PessoaController.findPessoaPorEmail(email);
-      if (!verificaEmail) {
+      const Email_Verification = await PessoaController.findPessoaPorEmail(email);
+      if (!Email_Verification) {
         res.status(401).json({ message: "Email ou senha incorreto" });
       }
 
-      if (verificaEmail) {
-        const verificaSenha = bcrypt.compareSync(senha, verificaEmail.senha);
-        if (verificaSenha) {
+      if (Email_Verification) {
+        const Password_Verification = bcrypt.compareSync(senha, Email_Verification.senha);
+        if (Password_Verification) {
           const token = jwt.sign(
-            { id: verificaEmail.id, nome: verificaEmail.nome },
+            { id: Email_Verification.id, nome: Email_Verification.nome },
             process.env.SECRET_JWT as string,
             {
-              expiresIn: "7d",
+              expiresIn: "15d",
             }
           );
           res.status(200).json({ access: token });
@@ -36,7 +36,7 @@ export class AuthController {
     }
   }
 
-  static async verificaJWt(req: Request, res: Response, next: NextFunction) {
+  static async verify_JWT(req: Request, res: Response, next: NextFunction) {
     try {
       const token = req.header("authorization")?.replace("Bearer ", "");
       if (!token) {

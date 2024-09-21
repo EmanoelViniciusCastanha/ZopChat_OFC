@@ -1,5 +1,5 @@
 import { io } from "../config/webSocket";
-import { MensagemGrupoController } from "../controllers/mensagemGrupo/mensagemGrupoController";
+import { groupMessagesController } from "../controllers/GroupMessages/groupMessagesController";
 import { MensagemPrivadaController } from "../controllers/mensagemPrivada/mensagemPrivadaController";
 
 interface IuserRoom {
@@ -13,7 +13,7 @@ const usersGrupo: IuserRoom[] = [];
 interface IUserPrivado {
   idUser: number;
   idReceptor: number;
-  idConversa: number;
+  idMessages: number;
   socketId: string;
 }
 
@@ -40,16 +40,16 @@ io.on("connection", (socket) => {
   socket.on("mensagemGrupo", async (data) => {
     const str = data.mensagem.replace(/\s/g, "");
     if (str.length > 0) {
-      const mensagem = await MensagemGrupoController.testecreateMensagemGrupo(
+      const mensagem = await groupMessagesController.testecreateMensagemGrupo(
         data
       );
 
-      io.to(data.idConversa).emit("mensagemGrupo", mensagem);
+      io.to(data.idMessages).emit("mensagemGrupo", mensagem);
     }
   });
 
   socket.on("userReceptor", (data) => {
-    socket.join(data.idConversa);
+    socket.join(data.idMessages);
 
     const userLogged = usersPrivado.find((user) => user.idUser === data.idUser);
     if (userLogged) {
@@ -58,7 +58,7 @@ io.on("connection", (socket) => {
       usersPrivado.push({
         idUser: data.idUser,
         idReceptor: data.idReceptor,
-        idConversa: data.idConversa,
+        idMessages: data.idMessages,
         socketId: socket.id,
       });
     }
@@ -69,12 +69,12 @@ io.on("connection", (socket) => {
     if (str.length > 0) {
       const mensagem =
         await MensagemPrivadaController.testecreateMensagemPrivada({
-          idConversa: data.idConversa,
+          idMessages: data.idMessages,
           idPessoa: data.idPessoa,
           mensagem: data.mensagem,
         });
 
-      io.to([data.idConversa]).emit("mensagemPrivada", mensagem);
+      io.to([data.idMessages]).emit("mensagemPrivada", mensagem);
     }
   });
 
