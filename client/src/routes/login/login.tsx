@@ -73,6 +73,7 @@
                 <div className="flex space-x-4">
                   <button
                     type="submit"
+                    onClick={handleLogin}
                     className="py-3 w-full bg-[#0e83f0] hover:bg-blue-600 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
                   >
                     Entrar
