@@ -42,11 +42,11 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#16181D] space-x-32">
+    <div className="flex min-h-screen items-center justify-center bg-[#16181D] space-x-12 ">
       <div className="bg-[#2E353B] shadow-md rounded-lg overflow-hidden w-[550px]">
         <div className="p-8 w-full">
           <div className="pb-8">
-            <h1 className="text-2xl text-white pb-3">Bem-vindo de Volta 👋</h1>
+            <h1 className="text-2xl text-white pb-3">Bem-vindo de Volta <span className="hand">👋</span></h1>
             <span className="text-xs text-white font-light pb-5">
               Sua comunicação empresarial nunca foi tão fácil. O Zopchat é a solução ideal para otimizar a colaboração entre equipes e melhorar o atendimento ao cliente.
             </span>
@@ -55,6 +55,7 @@ const LoginForm = () => {
             <div className="space-y-2">
               <label htmlFor="" className="text-white">Email</label>
               <Input
+                className="w-full p-4 rounded-lg bg-[#16181D] text-white"
                 color="primary"
                 size="lg"
                 type="email"
@@ -63,13 +64,13 @@ const LoginForm = () => {
                   setFormData((prev) => ({ ...prev, userEmail: e.target.value }))
                 }
                 placeholder="Digite seu e-mail"
-                fullWidth
+
               />
             </div>
-
             <div className="space-y-2">
               <label htmlFor="" className="text-white">Senha</label>
               <Input
+                className="w-full p-4 rounded-lg bg-[#16181D] text-white"
                 color="primary"
                 size="lg"
                 type={showPassword ? "text" : "password"}
@@ -112,7 +113,7 @@ const LoginForm = () => {
 
       <div>
         <Toaster position="top-center" richColors />
-        <div className="hidden md:block bg-cover bg-center select-none">
+        <div className="hidden md:block bg-cover bg-center select-none w-[700px]">
           <Image src="/src/Imagens/logo.png" />
         </div>
       </div>
