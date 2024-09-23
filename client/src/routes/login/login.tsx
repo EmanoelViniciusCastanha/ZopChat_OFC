@@ -44,7 +44,7 @@ const Login = () => {
         <div className="form-control-login">
           <label htmlFor="senha">Senha:</label>
           <input
-            className="input-login"
+            className="bg-black"
             type="password"
             name="senha"
             id="senha"
