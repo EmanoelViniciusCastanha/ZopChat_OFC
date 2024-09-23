@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import NavBar from "../../components/navbarComponents/navBar";
+import NavBar from "../../components/Componentes/nav_bar";
 import { webFetch } from "../../config/axiosConfig";
 import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../contexts/auth/authContext";
@@ -66,6 +66,7 @@ const TelaMessagesPrivada = () => {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     function onMsgEvent(data: any) {
       setMensagensBox((previous) => [...previous, data]);
       setTimeout(() => {

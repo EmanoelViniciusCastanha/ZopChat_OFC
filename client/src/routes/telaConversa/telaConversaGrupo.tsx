@@ -1,6 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import "./style/telaConversa.css";
-import NavBar from "../../components/navbarComponents/navBar";
+import NavBar from "../../components/Componentes/nav_bar";
 import { useParams } from "react-router-dom";
 import { webFetch } from "../../config/axiosConfig";
 import { AuthContext } from "../../contexts/auth/authContext";
