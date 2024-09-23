@@ -39,21 +39,21 @@ const CadastroGrupo = () => {
       <div className="flex justify-center mt-10">
         <button
           onClick={() => setIsOpen(true)}
-          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+          className="px-4 py-2 bg-blue-500 text-black rounded-lg hover:bg-blue-600"
         >
           Cadastrar Grupo
         </button>
       </div>
 
       {isOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-[#16181D] rounded-lg shadow-lg p-6 max-w-md w-full">
-            <h2 className="text-2xl font-bold mb-4">Cadastro de Grupo</h2>
+        <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center">
+          <div className="rounded-lg shadow-lg p-6 max-w-md w-full bg-black">
+            <h2 className="text-2xl font-bold mb-4 text-white">Cadastro de Grupo</h2>
             <form onSubmit={criarGrupo}>
               <div className="mb-4">
                 <label
                   htmlFor="nome"
-                  className="block text-gray-700 font-semibold mb-2"
+                  className="block text-white font-semibold mb-2"
                 >
                   Nome:
                 </label>
@@ -65,13 +65,13 @@ const CadastroGrupo = () => {
                   onChange={(e) =>
                     setGrupo((old) => ({ ...old, nome: e.target.value }))
                   }
-                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                 />
               </div>
               <div className="mb-4">
                 <label
                   htmlFor="descricao"
-                  className="block text-gray-700 font-semibold mb-2"
+                  className="block text-white font-semibold mb-2"
                 >
                   Descrição:
                 </label>
@@ -83,20 +83,20 @@ const CadastroGrupo = () => {
                   onChange={(e) =>
                     setGrupo((old) => ({ ...old, descricao: e.target.value }))
                   }
-                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                 />
               </div>
               <div className="flex justify-end space-x-4">
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
-                  className="px-4 py-2"
+                  className="px-4 py-2 text-white"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                  className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-blue-600"
                 >
                   Criar
                 </button>

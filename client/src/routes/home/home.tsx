@@ -1,8 +1,9 @@
 import NavBar from "../../components/Componentes/nav_bar";
 import { useState, useEffect, useContext } from "react";
-import DropDown from "../../components/Componentes/dropBox";
+import DropDown from "../../components/Componentes/drop";
 import { webFetch } from "../../config/axiosConfig";
 import { AuthContext } from "../../contexts/auth/authContext";
+import { Divider } from "@nextui-org/react";
 
 export type Pessoa = {
   email: string;
@@ -57,12 +58,13 @@ const Home = () => {
   return (
     <div className="bg-[#16181D] text-white min-h-screen">
       <NavBar />
-      <div className="container mx-auto p-4">
-        <div className="flex flex-col lg:flex-row items-center justify-between space-y-4 lg:space-y-0">
-          <div className="lg:w-1/2 w-full bg-gray-800 p-6 rounded-lg shadow-lg">
-            <h1 className="text-2xl font-bold mb-4">
-              Olá {auth.user?.nome}
+      <div>
+        <div className="flex flex-col lg:flex-row items-center justify-between space-y-4 lg:space-y-0 px-3 pt-3">
+          <div className="lg:w-[22%] h-[850px] bg-[#2E353B] p-5 shadow-lg ">
+            <h1 className="text-xl font-bold mb-4">
+              Olá!, {auth.user?.nome}
             </h1>
+            <Divider className="bg-[#2E353B]" />
             {listaGrupos.map((grupo) => (
               <div className="mb-4" key={grupo.id}>
                 <DropDown
