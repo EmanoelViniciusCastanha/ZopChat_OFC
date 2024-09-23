@@ -2,28 +2,28 @@ import express from "express";
 import { PeopleController } from "../controllers/People/peopleController";
 import { AuthController } from "../controllers/auth/authController";
 
-const pessoaRoutes = express.Router();
+const peopleRoutes = express.Router();
 
-pessoaRoutes.post("/pessoa", PeopleController.createPeople);
-pessoaRoutes.get(
+peopleRoutes.post("/pessoa", PeopleController.createPeople);
+peopleRoutes.get(
   "/pessoa",
   AuthController.verify_JWT,
   PeopleController.findAllPeople
 );
-pessoaRoutes.get(
+peopleRoutes.get(
   "/pessoa/:id",
   AuthController.verify_JWT,
   PeopleController.findPeopleForId
 );
-pessoaRoutes.patch(
+peopleRoutes.patch(
   "/pessoa/:idPessoa/envia/grupo/:idGrupo",
   AuthController.verify_JWT,
   PeopleController.sendPeopleToGroup
 );
-pessoaRoutes.delete(
+peopleRoutes.delete(
   "/pessoa/:id",
   AuthController.verify_JWT,
   PeopleController.deletePeople
 );
 
-export { pessoaRoutes };
+export { peopleRoutes };
