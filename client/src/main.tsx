@@ -11,6 +11,7 @@ import { AuthProvider } from "./contexts/auth/authProvider.tsx";
 import { RequireAuth } from "./contexts/auth/RequireAuth.tsx";
 import TelaConversaGrupo from "./routes/telaConversa/telaConversaGrupo.tsx";
 import TelaConversaPrivada from "./routes/telaConversa/telaConversaPrivada.tsx";
+import { NextUIProvider } from "@nextui-org/react";
 
 
 const router = createBrowserRouter([
@@ -65,7 +66,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <AuthProvider>
-      <RouterProvider router={router} />
+      <NextUIProvider>
+        <RouterProvider router={router} />
+      </NextUIProvider>
     </AuthProvider>
   </React.StrictMode>
 );
