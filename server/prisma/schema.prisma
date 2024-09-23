@@ -8,11 +8,11 @@ datasource db {
 }
 
 model Messages {
-  id               Int                @id(map: "Messages_pk") @default(autoincrement())
-  id_receptor      Int?
+  id               BigInt             @id(map: "Messages_pk") @default(autoincrement()) // Alterado para BigInt
+  id_receptor      BigInt?
   data_cadastro    DateTime           @default(now()) @db.Timestamptz(6)
-  id_pessoa        Int
-  id_grupo         Int?
+  id_pessoa        BigInt             // Alterado para BigInt
+  id_grupo         BigInt?            // Alterado para BigInt
   grupo            grupo?             @relation(fields: [id_grupo], references: [id], map: "grupo_fk")
   pessoa           pessoa             @relation(fields: [id_pessoa], references: [id], map: "pessoa_fk")
   mensagem_grupo   mensagem_grupo[]
@@ -23,7 +23,7 @@ model Messages {
 }
 
 model grupo {
-  id             Int              @id(map: "grupo_pk") @default(autoincrement())
+  id             BigInt           @id(map: "grupo_pk") @default(autoincrement()) // Alterado para BigInt
   nome           String           @default(dbgenerated("200")) @db.VarChar
   descricao      String?
   Messages       Messages[]
@@ -31,38 +31,38 @@ model grupo {
 }
 
 model grupos_pessoas {
-  id            Int      @id(map: "grupos_pessoas_pk") @default(autoincrement())
-  data_cadastro DateTime @default(now()) @db.Timestamptz(6)
-  id_pessoa     Int
-  id_grupo      Int
-  grupo         grupo    @relation(fields: [id_grupo], references: [id], map: "grupo_fk")
-  pessoa        pessoa   @relation(fields: [id_pessoa], references: [id], map: "pessoa_fk")
+  id            BigInt           @id(map: "grupos_pessoas_pk") @default(autoincrement()) // Alterado para BigInt
+  data_cadastro DateTime         @default(now()) @db.Timestamptz(6)
+  id_pessoa     BigInt           // Alterado para BigInt
+  id_grupo      BigInt           // Alterado para BigInt
+  grupo         grupo            @relation(fields: [id_grupo], references: [id], map: "grupo_fk")
+  pessoa        pessoa           @relation(fields: [id_pessoa], references: [id], map: "pessoa_fk")
 
   @@unique([id_pessoa, id_grupo], map: "grupo_pessoa_uq")
 }
 
 model mensagem_grupo {
-  id            Int      @id(map: "mensagem_grupo_pk") @default(autoincrement())
+  id            BigInt           @id(map: "mensagem_grupo_pk") @default(autoincrement()) // Alterado para BigInt
   mensagem      String
-  data_cadastro DateTime @default(now()) @db.Timestamptz(6)
-  id_Messages   Int
-  id_pessoa     Int
-  Messages      Messages @relation(fields: [id_Messages], references: [id], map: "Messages_fk")
-  pessoa        pessoa   @relation(fields: [id_pessoa], references: [id], map: "pessoa_fk")
+  data_cadastro DateTime         @default(now()) @db.Timestamptz(6)
+  id_Messages   BigInt           // Alterado para BigInt
+  id_pessoa     BigInt           // Alterado para BigInt
+  Messages      Messages         @relation(fields: [id_Messages], references: [id], map: "Messages_fk")
+  pessoa        pessoa           @relation(fields: [id_pessoa], references: [id], map: "pessoa_fk")
 }
 
 model mensagem_privada {
-  id            Int      @id(map: "mensagem_privada_pk") @default(autoincrement())
+  id            BigInt           @id(map: "mensagem_privada_pk") @default(autoincrement()) // Alterado para BigInt
   mensagem      String
-  data_cadastro DateTime @default(now()) @db.Timestamptz(6)
-  id_Messages   Int
-  id_pessoa     Int
-  Messages      Messages @relation(fields: [id_Messages], references: [id], map: "Messages_fk")
-  pessoa        pessoa   @relation(fields: [id_pessoa], references: [id], map: "pessoa_fk")
+  data_cadastro DateTime         @default(now()) @db.Timestamptz(6)
+  id_Messages   BigInt           // Alterado para BigInt
+  id_pessoa     BigInt           // Alterado para BigInt
+  Messages      Messages         @relation(fields: [id_Messages], references: [id], map: "Messages_fk")
+  pessoa        pessoa           @relation(fields: [id_pessoa], references: [id], map: "pessoa_fk")
 }
 
 model pessoa {
-  id               Int                @id(map: "pessoa_pk") @default(autoincrement())
+  id               BigInt             @id(map: "pessoa_pk") @default(autoincrement()) // Alterado para BigInt
   nome             String             @default(dbgenerated("200")) @db.VarChar
   email            String             @unique(map: "email_uq") @default(dbgenerated("255")) @db.VarChar
   senha            String             @db.VarChar

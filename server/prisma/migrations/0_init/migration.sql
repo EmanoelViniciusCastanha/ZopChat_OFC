@@ -11,7 +11,7 @@ CREATE TABLE "Messages" (
 
 -- CreateTable
 CREATE TABLE "grupo" (
-    "id" SERIAL NOT NULL,
+    "id" BIGSERIAL NOT NULL,
     "nome" VARCHAR NOT NULL DEFAULT 200,
     "descricao" TEXT,
 
@@ -20,7 +20,7 @@ CREATE TABLE "grupo" (
 
 -- CreateTable
 CREATE TABLE "grupos_pessoas" (
-    "id" SERIAL NOT NULL,
+    "id" BIGSERIAL NOT NULL,
     "data_cadastro" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "id_pessoa" INTEGER NOT NULL,
     "id_grupo" INTEGER NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE "mensagem_privada" (
 
 -- CreateTable
 CREATE TABLE "pessoa" (
-    "id" SERIAL NOT NULL,
+    "id" BIGSERIAL NOT NULL,
     "nome" VARCHAR NOT NULL DEFAULT 200,
     "email" VARCHAR NOT NULL DEFAULT 255,
     "senha" VARCHAR NOT NULL,

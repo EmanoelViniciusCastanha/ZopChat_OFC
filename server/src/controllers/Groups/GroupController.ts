@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { prismaClient } from "../../config/prismaClient";
-import { IGrupoCadastro } from "./interfaces/interfaceGroup";
+import { IRegisterGroup } from "./interfaces/interfaceGroup";
 
 export class Groups_Controller {
   static async findOneGrupo(id: number) {
@@ -40,13 +40,13 @@ export class Groups_Controller {
   }
 
   static async createGrupo(req: Request, res: Response) {
-    let IGrupoCadastro: IGrupoCadastro = req.body;
+    let IRegisterGroup: IRegisterGroup = req.body;
 
     try {
-      if (IGrupoCadastro.nome.length < 1) {
+      if (IRegisterGroup.nome.length < 1) {
         throw new Error("De um nome valido");
       }
-      await prismaClient.grupo.create({ data: IGrupoCadastro });
+      await prismaClient.grupo.create({ data: IRegisterGroup });
       res.status(201).json();
     } catch (e) {
       res.status(400).json({ message: `Erro ao cadastrar: ${e}` });

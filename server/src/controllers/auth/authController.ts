@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import bcrypt from "bcrypt";
-import { PessoaController } from "../pessoa/peopleController";
+import { PeopleController } from "../People/peopleController";
 import jwt from "jsonwebtoken";
 import * as dotenv from "dotenv";
 import { ICustomRequest, IUser } from "./interfaces/interfacePayload";
@@ -11,7 +11,7 @@ export class AuthController {
   static async login(req: Request, res: Response) {
     const { email, senha } = req.body;
     try {
-      const Email_Verification = await PessoaController.findPessoaPorEmail(email);
+      const Email_Verification = await PeopleController.findPeopleByEmail(email);
       if (!Email_Verification) {
         res.status(401).json({ message: "Email ou senha incorreto" });
       }

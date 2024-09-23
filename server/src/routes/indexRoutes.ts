@@ -1,10 +1,10 @@
 import express, { Request, Response } from "express";
 import { pessoaRoutes } from "./pessoaRoutes";
 import { authRoutes } from "./authRoutes";
-import { grupoRoutes } from "./grupoRoutes";
-import { MessagesRoutes } from "./MessagesRoutes";
-import { mensagemGrupoRoutes } from "./mensagemGrupoRoutes";
-import { mensagemPrivadaRoutes } from "./mensagemPrivadaRoutes";
+import { grupoRoutes } from "./groupsRoutes";
+import { MessagesRoutes } from "./messagesRoutes";
+import { mensagemGrupoRoutes } from "./groupMessagesRoutes";
+import { mensagemPrivadaRoutes } from "./privateMessagesRoutes";
 
 const routes = (app: any) => {
   app
