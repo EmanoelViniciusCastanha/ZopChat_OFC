@@ -106,7 +106,7 @@ const LoginForm = () => {
         </div>
       </div>
 
-      <div className="hidden md:block bg-cover bg-center select-none">
+      <div className="block md:hidden bg-cover bg-center select-none">
         <Image src="/src/Imagens/logo.png" />
       </div>
 
