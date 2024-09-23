@@ -1,16 +1,16 @@
 import { Request, Response } from "express";
-import { IMensagemGrupo } from "./interface/interfaceGroupMessages";
+import { IGroupMessages } from "./interface/interfaceGroupMessages";
 import { prismaClient } from "../../config/prismaClient";
 
 export class groupMessagesController {
-  static async createMensagem(req: Request, res: Response) {
-    const IMensagemGrupo: IMensagemGrupo = req.body;
+  static async createMessages(req: Request, res: Response) {
+    const IGroupMessages: IGroupMessages = req.body;
     try {
       await prismaClient.mensagem_grupo.create({
         data: {
-          id_pessoa: IMensagemGrupo.idPessoa,
-          id_Messages: IMensagemGrupo.idMessages,
-          mensagem: IMensagemGrupo.mensagem,
+          id_pessoa: IGroupMessages.idPessoa,
+          id_Messages: IGroupMessages.idMessages,
+          mensagem: IGroupMessages.mensagem,
         },
       });
       res.status(200).json();
@@ -18,13 +18,13 @@ export class groupMessagesController {
       throw new Error(e);
     }
   }
-  static async testecreateMensagemGrupo(IMensagemGrupo: IMensagemGrupo) {
+  static async createGroupMessages(IGroupMessages: IGroupMessages) {
     try {
       const mensagem = await prismaClient.mensagem_grupo.create({
         data: {
-          id_pessoa: IMensagemGrupo.idPessoa,
-          id_Messages: IMensagemGrupo.idMessages,
-          mensagem: IMensagemGrupo.mensagem,
+          id_pessoa: IGroupMessages.idPessoa,
+          id_Messages: IGroupMessages.idMessages,
+          mensagem: IGroupMessages.mensagem,
         },
       });
       const mensagemData = await prismaClient.mensagem_grupo.findUnique({
@@ -48,7 +48,7 @@ export class groupMessagesController {
     }
   }
 
-  static async findMensagemUser(req: Request, res: Response) {
+  static async findUserMessage(req: Request, res: Response) {
     const { idGrupo } = req.params;
     const mensagens = await prismaClient.mensagem_grupo.findMany({
       where: { Messages: { id_grupo: Number(idGrupo) } },

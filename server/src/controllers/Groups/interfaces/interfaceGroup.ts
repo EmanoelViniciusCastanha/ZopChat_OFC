@@ -1,4 +1,4 @@
-export interface IGrupoCadastro {
+export interface IRegisterGroup{
   nome: string;
   descricao: string;
 }

@@ -1,29 +1,29 @@
 import express from "express";
-import { PessoaController } from "../controllers/pessoa/peopleController";
+import { PeopleController } from "../controllers/People/peopleController";
 import { AuthController } from "../controllers/auth/authController";
 
 const pessoaRoutes = express.Router();
 
-pessoaRoutes.post("/pessoa", PessoaController.createPessoa);
+pessoaRoutes.post("/pessoa", PeopleController.createPeople);
 pessoaRoutes.get(
   "/pessoa",
   AuthController.verify_JWT,
-  PessoaController.findAllPessoa
+  PeopleController.findAllPeople
 );
 pessoaRoutes.get(
   "/pessoa/:id",
   AuthController.verify_JWT,
-  PessoaController.findPessoaForId
+  PeopleController.findPeopleForId
 );
 pessoaRoutes.patch(
   "/pessoa/:idPessoa/envia/grupo/:idGrupo",
   AuthController.verify_JWT,
-  PessoaController.sendPessoaToGrupo
+  PeopleController.sendPeopleToGroup
 );
 pessoaRoutes.delete(
   "/pessoa/:id",
   AuthController.verify_JWT,
-  PessoaController.destroyPessoa
+  PeopleController.deletePeople
 );
 
 export { pessoaRoutes };

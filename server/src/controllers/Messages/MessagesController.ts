@@ -1,19 +1,19 @@
 import { Request, Response } from "express";
 import { AuthController } from "../auth/authController";
 import { prismaClient } from "../../config/prismaClient";
-import { PessoaController } from "../pessoa/peopleController";
+import { PeopleController } from "../People/peopleController";
 import {
-  IMessagesGrupo,
-  IMessagesPrivada,
-} from "./interface/interfaceConverse";
+  IGroupMessages,
+  IPrivateMessages,
+} from "./interface/interfaceMessages";
 
 export class Messages_Controller {
-  static async initMessagesGrupo(
+  static async initGroupMessages(
     idEmissor: number,
     idGrupo: number
   ): Promise<any> {
     try {
-      const Messages = await prismaClient.Messages.create({
+      const Messages = await prismaClient.messages.create({
         data: { id_pessoa: idEmissor, id_grupo: idGrupo },
       });
       return Messages;
@@ -23,17 +23,17 @@ export class Messages_Controller {
   }
 
   static async find_group_Messages(req: Request, res: Response) {
-    const IMessages: IMessagesGrupo = req.body;
+    const IMessages: IGroupMessages = req.body;
     try {
       const user = await AuthController.currentUser(IMessages.access);
-      const pessoa = await PessoaController.findOnePessoa(user.id);
+      const pessoa = await PeopleController.findOnePeople(user.id);
 
-      const Messages = await prismaClient.Messages.findFirst({
+      const Messages = await prismaClient.messages.findFirst({
         where: { id_grupo: IMessages.idGrupo },
       });
 
       if (Messages == null) {
-        const Messages = await Messages_Controller.initMessagesGrupo(
+        const Messages = await Messages_Controller.initGroupMessages(
           pessoa.id,
           IMessages.idGrupo
         );
@@ -48,7 +48,7 @@ export class Messages_Controller {
 
   static async initMessagesPrivada(idEmissor: number, idReceptor: number) {
     try {
-      const Messages = await prismaClient.Messages.create({
+      const Messages = await prismaClient.messages.create({
         data: { id_pessoa: idEmissor, id_receptor: idReceptor },
       });
       return Messages;
@@ -58,12 +58,12 @@ export class Messages_Controller {
   }
 
   static async findMessagesUserPrivada(req: Request, res: Response) {
-    const IMessages: IMessagesPrivada = req.body;
+    const IMessages: IPrivateMessages = req.body;
     try {
       const user = await AuthController.currentUser(IMessages.access);
-      const pessoa = await PessoaController.findOnePessoa(user.id);
+      const pessoa = await PeopleController.findOnePeople(user.id);
 
-      const Messages = await prismaClient.Messages.findFirst({
+      const Messages = await prismaClient.messages.findFirst({
         where: {
           OR: [
             {

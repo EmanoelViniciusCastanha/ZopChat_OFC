@@ -1,6 +1,6 @@
 import { io } from "../config/webSocket";
 import { groupMessagesController } from "../controllers/GroupMessages/groupMessagesController";
-import { MensagemPrivadaController } from "../controllers/mensagemPrivada/mensagemPrivadaController";
+import { PrivateMessagesController } from "../controllers/PrivateMessages/PrivateMessagesController";
 
 interface IuserRoom {
   idUser: number;
@@ -40,7 +40,7 @@ io.on("connection", (socket) => {
   socket.on("mensagemGrupo", async (data) => {
     const str = data.mensagem.replace(/\s/g, "");
     if (str.length > 0) {
-      const mensagem = await groupMessagesController.testecreateMensagemGrupo(
+      const mensagem = await groupMessagesController.createGroupMessages(
         data
       );
 
@@ -68,7 +68,7 @@ io.on("connection", (socket) => {
     const str = data.mensagem.replace(/\s/g, "");
     if (str.length > 0) {
       const mensagem =
-        await MensagemPrivadaController.testecreateMensagemPrivada({
+        await PrivateMessagesController.createPrivateMessage({
           idMessages: data.idMessages,
           idPessoa: data.idPessoa,
           mensagem: data.mensagem,
