@@ -1,66 +1,83 @@
-import "./style/loginTela.css";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/auth/authContext";
+import { Input , Image } from "@nextui-org/react";
 
-type Payload = {
-  email: string;
-  senha: string;
+type FormData = {
+  userEmail: string;
+  userPassword: string;
 };
 
-const Login = () => {
-  const auth = useContext(AuthContext);
-  const [payload, setPayload] = useState<Payload>({ email: "", senha: "" });
+const LoginForm = () => {
+  const authContext = useContext(AuthContext);
+  const [formData, setFormData] = useState<FormData>({
+    userEmail: "",
+    userPassword: "",
+  });
 
-  const logar = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (payload.email && payload.senha) {
-      await auth
-        .signIn(payload.email, payload.senha)
+  const handleLogin = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (formData.userEmail && formData.userPassword) {
+      await authContext
+        .signIn(formData.userEmail, formData.userPassword)
         .then()
-        .catch((e) => {
-          alert(e.response.data.message);
+        .catch((error) => {
+          alert(error.response.data.message);
         });
     }
   };
 
   return (
-    <div className="login-container">
-      <form onSubmit={logar}>
-        <div className="form-control-login">
-          <label htmlFor="email">Email:</label>
-          <input
-            className="input-login"
-            type="text"
-            name="email"
-            id="email"
-            value={payload.email}
-            onChange={(e) =>
-              setPayload((old) => ({ ...old, email: e.target.value }))
-            }
-            placeholder="Digite seu e-mail"
-          />
-        </div>
+    <div className="flex min-h-screen items-center justify-center bg-[#16181D] space-x-32">
+      <div className=" bg-[#2E353B] shadow-md rounded-lg overflow-hidden w-[550px] ">
+        <div className="p-8 w-full">
+          <form onSubmit={handleLogin} className="space-y-6">
+            <div className="space-y-2">
+              <Input
+                className="text-white"
+                label="Email"  
+                fullWidth
+                color="primary"
+                size="lg"
+                type="email"
+                value={formData.userEmail}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, userEmail: e.target.value }))
+                }
+                placeholder="Digite seu e-mail"
+              />
+            </div>
 
-        <div className="form-control-login">
-          <label htmlFor="senha">Senha:</label>
-          <input
-            className="bg-black"
-            type="password"
-            name="senha"
-            id="senha"
-            value={payload.senha}
-            onChange={(e) =>
-              setPayload((old) => ({ ...old, senha: e.target.value }))
-            }
-            placeholder="Digite sua senha"
-          />
+            <div className="space-y-2">
+              <Input
+                className="text-white"
+                label="Senha" 
+                color="primary"
+                size="lg"
+                value={formData.userPassword}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    userPassword: e.target.value,
+                  }))
+                }
+                placeholder="Digite sua senha"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="w-full py-3 px-4 bg-[#0e83f0] hover:bg-blue-600 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+            >
+              Entrar
+            </button>
+          </form>
         </div>
-        <button className="button-login" type="submit">
-          Entrar
-        </button>
-      </form>
+      </div>
+        <div className="hidden md:block bg-cover bg-center select-none">
+        <Image src="/src/Imagens/logo.png"/>
+        </div>
     </div>
   );
 };
 
-export default Login;
+export default LoginForm;
