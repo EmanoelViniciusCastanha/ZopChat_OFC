@@ -4,11 +4,23 @@ import { User } from "./type/user";
 import { webFetch } from "../../config/axiosConfig";
 import { jwtDecode } from "jwt-decode";
 
+
+
 export const AuthProvider = ({ children }: { children: JSX.Element }) => {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const validateToken = async () => {
+      if (process.env.NODE_ENV === "development") {
+        const mockUser: User = {
+          id: 1,
+          nome: "Emanoel Castanha",
+        };
+        setUser(mockUser);
+        console.log("Autenticação desabilitada no modo de desenvolvimento");
+        return;
+      }
+
       const storageData = localStorage.getItem("AuthAccess");
       if (storageData) {
         await webFetch
@@ -16,11 +28,11 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
             access: storageData,
           })
           .then(() => {
-            const decodeUser = jwtDecode(storageData);
+            const decodeUser = jwtDecode(storageData) as User;
             webFetch.defaults.headers.common[
               "Authorization"
             ] = `Bearer ${storageData}`;
-            setUser(decodeUser as User);
+            setUser(decodeUser);
             setToken(storageData);
           });
       }
@@ -36,11 +48,11 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     const data = login.data;
 
     if (data.access) {
-      const decodeUser = jwtDecode(data.access);
+      const decodeUser = jwtDecode(data.access) as User;
       webFetch.defaults.headers.common[
         "Authorization"
       ] = `Bearer ${data.access}`;
-      setUser(decodeUser as User);
+      setUser(decodeUser);
       setToken(data.access);
       return true;
     }
@@ -49,6 +61,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
   const signOut = () => {
     setUser(null);
+    localStorage.removeItem("AuthAccess");
   };
 
   const setToken = (access: string) => {
@@ -56,7 +69,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, signIn: signIn, signOut: signOut }}>
+    <AuthContext.Provider value={{ user, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );

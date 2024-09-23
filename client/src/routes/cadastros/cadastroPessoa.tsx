@@ -1,5 +1,4 @@
-import "./style/cadastroPessoa.css";
-import NavBar from "../../components/navbarComponents/navBar";
+import NavBar from "../../components/Componentes/nav_bar";
 import { webFetch } from "../../config/axiosConfig";
 import { useEffect, useState } from "react";
 

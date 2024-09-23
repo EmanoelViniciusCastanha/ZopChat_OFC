@@ -1,14 +1,12 @@
-import NavBar from "../../components/navbarComponents/navBar";
+import NavBar from "../../components/Componentes/nav_bar";
 import { useState, useEffect, useContext } from "react";
-import "../../components/homeComponents/style/dropBox.css";
-import DropDown from "../../components/homeComponents/dropBox";
+import DropDown from "../../components/Componentes/dropBox";
 import { webFetch } from "../../config/axiosConfig";
 import { AuthContext } from "../../contexts/auth/authContext";
-import "./style/home.css";
 
-export type pessoas = {
+export type Pessoa = {
   email: string;
-  grupos_pessoas: {
+  gruposRelacionados: {
     id: number;
     grupo: {
       id: number;
@@ -20,7 +18,7 @@ export type pessoas = {
   nome: string;
 };
 
-type grupos = {
+type Grupo = {
   id: number;
   nome: string;
   descricao: string;
@@ -28,61 +26,56 @@ type grupos = {
 
 const Home = () => {
   const auth = useContext(AuthContext);
-  const [pessoas, setPessoa] = useState<pessoas[]>([]);
-  const [grupos, setGrupo] = useState<grupos[]>([]);
+  const [listaPessoas, setListaPessoas] = useState<Pessoa[]>([]);
+  const [listaGrupos, setListaGrupos] = useState<Grupo[]>([]);
 
-  const getUsers = async () => {
+  const fetchPessoas = async () => {
     try {
       const response = await webFetch.get("/pessoa");
-
       const data = response.data;
-
-      setPessoa(data);
+      setListaPessoas(data);
     } catch (e) {
       console.log(e);
     }
   };
 
-  const getGrupos = async () => {
+  const fetchGrupos = async () => {
     try {
       const response = await webFetch.get("/grupo");
-
       const data = response.data;
-
-      setGrupo(data);
+      setListaGrupos(data);
     } catch (e) {
       console.log(e);
     }
   };
 
   useEffect(() => {
-    getUsers();
-    getGrupos();
+    fetchPessoas();
+    fetchGrupos();
   }, []);
 
   return (
-    <>
-      <div className="container-home">
-        <NavBar />
-        <div className="container-main">
-          <div className="background-drop">
-            <h1 className="nome-user">Olá {auth.user?.nome}</h1>
-            {grupos.map((grupo) => (
-              <div className="grupos" key={grupo.id}>
+    <div className="bg-[#16181D] text-white min-h-screen">
+      <NavBar />
+      <div className="container mx-auto p-4">
+        <div className="flex flex-col lg:flex-row items-center justify-between space-y-4 lg:space-y-0">
+          <div className="lg:w-1/2 w-full bg-gray-800 p-6 rounded-lg shadow-lg">
+            <h1 className="text-2xl font-bold mb-4">
+              Olá {auth.user?.nome}
+            </h1>
+            {listaGrupos.map((grupo) => (
+              <div className="mb-4" key={grupo.id}>
                 <DropDown
                   grupoNome={grupo.nome}
-                  users={pessoas}
-                  idGrupo={grupo.id}
+                  usuarios={listaPessoas}
+                  grupoId={grupo.id}
                 />
               </div>
             ))}
           </div>
-          <div className="img-logo-container">
-            <img src="../../../img/userLogo.png" alt="" className="img-logo" />
-          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
