@@ -63,24 +63,24 @@ const DropDown = (props: IProps) => {
       <ul className="menu">
         {open
           ? props.users.map((user) => {
-              const filtro = user.grupos_pessoas.filter(
-                (item) => item.grupo.id === props.idGrupo
-              );
-              return (
-                <>
-                  {filtro.length > 0 && auth.user?.id != user.id ? (
-                    <li className="menu-item" key={user.id}>
-                      <button
-                        className="menu-nome-user"
-                        onClick={() => postMessagesPrivada(user.id)}
-                      >
-                        {user.nome}
-                      </button>
-                    </li>
-                  ) : null}
-                </>
-              );
-            })
+            const filtro = user.grupos_pessoas.filter(
+              (item) => item.grupo.id === props.idGrupo
+            );
+            return (
+              <>
+                {filtro.length > 0 && auth.user?.id != user.id ? (
+                  <li className="menu-item" key={user.id}>
+                    <button
+                      className="menu-nome-user"
+                      onClick={() => postMessagesPrivada(user.id)}
+                    >
+                      {user.nome}
+                    </button>
+                  </li>
+                ) : null}
+              </>
+            );
+          })
           : null}
       </ul>
     </>

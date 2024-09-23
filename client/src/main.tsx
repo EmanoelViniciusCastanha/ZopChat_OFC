@@ -9,8 +9,8 @@ import CadastroPessoa from "./routes/cadastros/cadastroPessoa.tsx";
 import CadastroGrupo from "./routes/cadastros/cadastroGrupo.tsx";
 import { AuthProvider } from "./contexts/auth/authProvider.tsx";
 import { RequireAuth } from "./contexts/auth/RequireAuth.tsx";
-import TelaMessagesGrupo from "./routes/telaMessages/telaMessagesGrupo.tsx";
-import TelaMessagesPrivada from "./routes/telaMessages/telaMessagesPrivada.tsx";
+import TelaMessagesGrupo from "./routes/telaConversa/telaConversaGrupo.tsx";
+import TelaMessagesPrivada from "./routes/telaConversa/telaConversaPrivada.tsx";
 
 const router = createBrowserRouter([
   {
