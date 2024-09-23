@@ -12,6 +12,7 @@ import { RequireAuth } from "./contexts/auth/RequireAuth.tsx";
 import TelaConversaGrupo from "./routes/telaConversa/telaConversaGrupo.tsx";
 import TelaConversaPrivada from "./routes/telaConversa/telaConversaPrivada.tsx";
 
+
 const router = createBrowserRouter([
   {
     element: <App />,

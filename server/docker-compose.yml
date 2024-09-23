@@ -1,13 +1,12 @@
-
 services:
   db:
-    image: postgres:14-alpine
+    image: postgres:16-alpine
     ports:
       - 5433:5432
     environment:
       POSTGRES_USER: pguser
       POSTGRES_PASSWORD: pgpassword
-      POSTGRES_DB: ws_projeto
+      POSTGRES_DB: ZopChatDb
   admin:
     image: adminer
     restart: always

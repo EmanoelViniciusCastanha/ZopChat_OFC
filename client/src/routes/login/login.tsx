@@ -45,19 +45,71 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-[#16181D] px-3 sm:px-0 space-y-4 sm:space-y-0 sm:flex-row sm:space-x-16">
-      <div className="block md:hidden select-none mb-4 sm:mb-0 w-[300px] sm:w-full">
-        <Image src="/src/Imagens/logo.png" />
-      </div>
-      <div className="bg-[#2E353B] shadow-md rounded-lg overflow-hidden w-[390px] sm:w-[550px]">
-        <div className="p-8 w-full">
-          <div className="pb-8">
-            <h1 className="text-3xl text-white pb-3 font-bold flex items-center">
-              Bem-vindo de Volta <span className="ml-2 hand">👋</span>
-            </h1>
-            <span className="text-[12px] text-white font-normal pb-5">
-              Sua comunicação empresarial nunca foi tão fácil. O Zopchat é a solução ideal para otimizar a colaboração entre equipes e melhorar o atendimento ao cliente.
-            </span>
+      <div className="flex min-h-screen items-center justify-center bg-[#16181D] space-x-32">
+        <div className="bg-[#2E353B] shadow-md rounded-lg overflow-hidden w-[550px]">
+          <div className="p-8 w-full">
+            <div className="pb-8">
+              <h1 className="text-2xl text-white pb-3">Bem-vindo de Volta 👋</h1>
+              <span className="text-xs text-white font-light pb-5">
+                Sua comunicação empresarial nunca foi tão fácil. O Zopchat é a solução ideal para otimizar a colaboração entre equipes e melhorar o atendimento ao cliente.
+              </span>
+            </div>
+          <form onSubmit={handleLogin} className="space-y-6">
+                <div className="space-y-2">
+                  <label htmlFor="" className="text-white">Email</label>
+                  <Input
+                    color="primary"
+                    size="lg"
+                    type="email"
+                    value={formData.userEmail}
+                    onChange={(e) =>
+                      setFormData((prev) => ({ ...prev, userEmail: e.target.value }))
+                    }
+                    placeholder="Digite seu e-mail"
+                    fullWidth
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label htmlFor="" className="text-white">Senha</label>
+                  <Input
+                    color="primary"
+                    size="lg"
+                    type="password"
+                    value={formData.userPassword}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        userPassword: e.target.value,
+                      }))
+                    }
+                    placeholder="Digite sua senha"
+                    fullWidth
+                  />
+                </div>
+
+                <div className="flex space-x-4">
+                  <button
+                    type="submit"
+                    onClick={handleLogin}
+                    className="py-3 w-full bg-[#0e83f0] hover:bg-blue-600 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+                  >
+                    Entrar
+                  </button>
+                  <button
+                    type="button"
+                    className="py-3 w-full bg-[#00A03C] hover:bg-green-600 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+                  >
+                    Cadastrar-se
+                  </button>
+                </div>
+    </form>
+
+
+            </div>
+          </div>
+          <div className="hidden md:block bg-cover bg-center select-none">
+            <Image src="/src/Imagens/logo.png" />
           </div>
           <form onSubmit={handleLogin} className="space-y-6 w-full">
             <div className="space-y-2 w-full">
