@@ -1,7 +1,7 @@
 {
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
-    "@types/jsonwebtoken": "^9.0.7",
+    "@types/webtoken": "^9.0.7",
     "@types/node": "^22.5.5",
     "@types/socket.io": "^3.0.2",
     "prisma": "^5.19.1"

@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/auth/authContext";
 import { Image } from "@nextui-org/react";
 import { Eye, EyeOff } from "lucide-react";
+import { toast, Toaster } from "sonner"; 
 
 type FormData = {
   userEmail: string;
@@ -19,12 +20,22 @@ const LoginForm = () => {
 
   const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault();
+
+    if (!formData.userEmail || !formData.userPassword) {
+      toast.error("Por favor, preencha todos os campos.");
+      return;
+    }
+
     if (formData.userEmail && formData.userPassword) {
       await authContext
         .signIn(formData.userEmail, formData.userPassword)
-        .then()
+        .then(() => {
+          toast.success("Login realizado com sucesso!");
+        })
         .catch((error) => {
-          alert(error.response.data.message);
+          toast.error(
+            error.response?.data?.message || "Erro ao tentar fazer login."
+          );
         });
     }
   };
@@ -34,8 +45,11 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#16181D] space-x-32">
-      <div className="bg-[#2E353B] shadow-md rounded-lg overflow-hidden w-[550px]">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-[#16181D] px-3 sm:px-0 space-y-4 sm:space-y-0 sm:flex-row sm:space-x-16">
+      <div className="block md:hidden select-none mb-4 sm:mb-0 w-[300px] sm:w-full">
+        <Image src="/src/Imagens/logo.png" />
+      </div>
+      <div className="bg-[#2E353B] shadow-md rounded-lg overflow-hidden w-[390px] sm:w-[550px]">
         <div className="p-8 w-full">
           <div className="pb-8">
             <h1 className="text-3xl text-white pb-3 font-bold flex items-center">
@@ -102,7 +116,10 @@ const LoginForm = () => {
           </form>
         </div>
       </div>
-      <div className="hidden md:block bg-cover bg-center select-none">
+      <div>
+      <Toaster position="top-center" richColors  />
+      </div>
+      <div className="hidden md:block bg-cover bg-center select-none ">
         <Image src="/src/Imagens/logo.png" />
       </div>
     </div>

@@ -27,3 +27,8 @@
   display: inline-block;
   animation: handWave 2s ease-in-out infinite;
 }
+
+body {
+  margin: 0;
+  padding-right: 0 !important;
+}
