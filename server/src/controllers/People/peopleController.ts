@@ -107,7 +107,7 @@ export class PeopleController {
       }
       const grupo = await Groups_Controller.findOneGrupo(Number(idGrupo));
 
-      await peopleGroupController.createPeopleGroups(pessoa.id, grupo.id);
+      await peopleGroupController.createPeopleGroups(Number(pessoa.id), Number(grupo.id));
       res.status(200).json();
     } catch (e) {
       res.status(400).json({

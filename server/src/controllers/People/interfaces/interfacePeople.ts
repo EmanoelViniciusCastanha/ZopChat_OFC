@@ -1,5 +1,5 @@
 export interface IPeople {
-  id: number;
+  id: BigInt;
   nome: string;
   email: string;
   senha: string;

@@ -34,7 +34,7 @@ export class Messages_Controller {
 
       if (Messages == null) {
         const Messages = await Messages_Controller.initGroupMessages(
-          pessoa.id,
+          Number(pessoa.id),
           IMessages.idGrupo
         );
         res.status(200).json(Messages);
@@ -79,7 +79,7 @@ export class Messages_Controller {
       });
       if (Messages == null) {
         const Messages = await Messages_Controller.initMessagesPrivada(
-          pessoa.id,
+          Number(pessoa.id),
           IMessages.idReceptor
         );
 

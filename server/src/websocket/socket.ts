@@ -20,6 +20,7 @@ interface IUserPrivado {
 const usersPrivado: IUserPrivado[] = [];
 
 io.on("connection", (socket) => {
+  console.log(`User connected: ${socket.id}`)
   socket.on("room", (data) => {
     socket.join(data.grupo);
 
