@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { IMensagemPrivada } from "./interface/interfaceMensagemPrivada";
+import { IMensagemPrivada } from "./interface/interfacePrivateMessages";
 import { prismaClient } from "../../config/prismaClient";
 
 export class PrivateMessagesController {
