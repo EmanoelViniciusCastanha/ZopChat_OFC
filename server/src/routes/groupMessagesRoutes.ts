@@ -5,13 +5,11 @@ import { groupMessagesController } from "../controllers/GroupMessages/groupMessa
 const mensagemGrupoRoutes = express.Router();
 mensagemGrupoRoutes.get(
   "/mensagens/grupo/:idGrupo",
-  AuthController.verify_JWT,
   groupMessagesController.findUserMessage
 );
 
 mensagemGrupoRoutes.post(
   "/mensagem/grupo",
-  AuthController.verify_JWT,
-  groupMessagesController.createMessages
+    groupMessagesController.createMessages
 );
 export { mensagemGrupoRoutes };

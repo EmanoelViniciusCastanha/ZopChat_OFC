@@ -5,13 +5,11 @@ const mensagemPrivadaRoutes = express.Router();
 
 mensagemPrivadaRoutes.post(
   "/mensagem/privada",
-  AuthController.verify_JWT,
   PrivateMessagesController.createMessages
 );
 
 mensagemPrivadaRoutes.get(
   "/mensagens/privada/emissor/:idEmissor/receptor/:idReceptor",
-  AuthController.verify_JWT,
   PrivateMessagesController.findUserMessage
 );
 

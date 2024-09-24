@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { AuthController } from "../auth/authController";
 import { prismaClient } from "../../config/prismaClient";
 import { PeopleController } from "../People/peopleController";
 import {
@@ -25,8 +24,8 @@ export class Messages_Controller {
   static async find_group_Messages(req: Request, res: Response) {
     const IMessages: IGroupMessages = req.body;
     try {
-      const user = await AuthController.currentUser(IMessages.access);
-      const pessoa = await PeopleController.findOnePeople(user.id);
+      // Substituir a lógica que dependia de AuthController.currentUser
+      const pessoa = await PeopleController.findOnePeople(Number(IMessages.access)); // Aqui assumimos que 'access' contém o ID do usuário
 
       const Messages = await prismaClient.messages.findFirst({
         where: { id_grupo: IMessages.idGrupo },
@@ -60,8 +59,8 @@ export class Messages_Controller {
   static async findMessagesUserPrivada(req: Request, res: Response) {
     const IMessages: IPrivateMessages = req.body;
     try {
-      const user = await AuthController.currentUser(IMessages.access);
-      const pessoa = await PeopleController.findOnePeople(user.id);
+      // Substituir a lógica que dependia de AuthController.currentUser
+      const pessoa = await PeopleController.findOnePeople(Number(IMessages.access)); // Aqui assumimos que 'access' contém o ID do usuário
 
       const Messages = await prismaClient.messages.findFirst({
         where: {
