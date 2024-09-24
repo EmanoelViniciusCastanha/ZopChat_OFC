@@ -1,7 +1,5 @@
-// websocket.ts
 import { Server } from "socket.io";
 import { serverHttp } from "./server";
-import jwt from "jsonwebtoken";
 
 const io = new Server(serverHttp, {
   cors: {
@@ -10,23 +8,21 @@ const io = new Server(serverHttp, {
 });
 
 io.on("connection", (socket) => {
-  // Pega o token enviado na conexão do cliente
-  const token = socket.handshake.auth.token;
+  // Supondo que o cliente ainda envie algum tipo de identificação no handshake
+  const userId = socket.handshake.auth.userId;  // Pode ser um ID de usuário diretamente
 
-  // Verifica o token
-  try {
-    const decoded = jwt.verify(token, process.env.SECRET_JWT as string);
-    console.log("Usuário autenticado:", decoded);
+  if (userId) {
+    console.log("Usuário conectado:", userId);
 
-    // Aqui você pode armazenar o usuário autenticado em algum lugar no socket
-    socket.data.user = decoded; // Pode ser útil para acessá-lo em eventos futuros
+    // Aqui você pode armazenar o ID do usuário em algum lugar no socket
+    socket.data.user = { id: userId }; // Armazena o ID do usuário no socket
 
     socket.on("disconnect", () => {
       console.log("Usuário desconectado:", socket.id);
     });
-  } catch (error) {
-    console.log("Autenticação falhou:", error);
-    socket.disconnect(); // Desconecta o usuário se a autenticação falhar
+  } else {
+    console.log("Autenticação falhou: ID de usuário não fornecido");
+    socket.disconnect(); // Desconecta o usuário se o ID não for fornecido
   }
 });
 
