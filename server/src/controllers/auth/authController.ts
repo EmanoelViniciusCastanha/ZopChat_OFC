@@ -13,6 +13,7 @@ export class AuthController {
 
       const Password_Verification = bcrypt.compareSync(senha, Email_Verification.senha);
       if (Password_Verification) {
+        // Remover a geração do token JWT
         return res.status(200).json({ message: "Login bem-sucedido", user: { id: Email_Verification.id, nome: Email_Verification.nome } });
       } else {
         return res.status(401).json({ message: "Email ou senha incorretos" });
@@ -22,6 +23,8 @@ export class AuthController {
     }
   }
 
+  // Remover a função verify_JWT, pois não será mais utilizada
+  // static async verify_JWT(req: Request, res: Response, next: NextFunction) { ... }
 
   static async FindUser(req: Request, res: Response) {
     try {
@@ -38,4 +41,6 @@ export class AuthController {
     }
   }
 
+  // Remover o método currentUser, pois não será mais necessário sem JWT
+  // static async currentUser(access: string) { ... }
 }

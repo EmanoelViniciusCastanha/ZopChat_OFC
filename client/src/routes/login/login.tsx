@@ -5,15 +5,15 @@ import { toast, Toaster } from "sonner";
 import { Eye, EyeOff } from "lucide-react";
 
 type FormData = {
-  email: string;
-  senha: string;
+  userEmail: string;
+  userPassword: string;
 };
 
 const LoginForm = () => {
   const authContext = useContext(AuthContext);
   const [formData, setFormData] = useState<FormData>({
-    email: "",
-    senha: "",
+    userEmail: "",
+    userPassword: "",
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -21,13 +21,13 @@ const LoginForm = () => {
   const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    if (!formData.email || !formData.senha) {
+    if (!formData.userEmail || !formData.userPassword) {
       toast.error("Por favor, preencha todos os campos.");
       return;
     }
 
     await authContext
-      .signIn(formData.email, formData.senha)
+      .signIn(formData.userEmail, formData.userPassword)
       .then(() => {
         toast.success("Login realizado com sucesso!");
       })
@@ -58,9 +58,9 @@ const LoginForm = () => {
               <input
                 className="w-full p-4 rounded-lg bg-[#16181D] text-white"
                 type="email"
-                value={formData.email}
+                value={formData.userEmail}
                 onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, email: e.target.value }))
+                  setFormData((prev) => ({ ...prev, userEmail: e.target.value }))
                 }
                 placeholder="Digite seu e-mail"
               />
@@ -70,11 +70,11 @@ const LoginForm = () => {
               <input
                 className="w-full p-4 rounded-lg bg-[#16181D] text-white"
                 type={showPassword ? "text" : "password"}
-                value={formData.senha}
+                value={formData.userPassword}
                 onChange={(e) =>
                   setFormData((prev) => ({
                     ...prev,
-                    senha: e.target.value,
+                    userPassword: e.target.value,
                   }))
                 }
                 placeholder="Digite sua senha"
