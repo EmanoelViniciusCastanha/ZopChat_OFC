@@ -1,6 +1,6 @@
 import { Server } from "socket.io";
 import { serverHttp } from "./server";
-
+// Adicione a importação do Prisma
 
 const io = new Server(serverHttp, {
   cors: {

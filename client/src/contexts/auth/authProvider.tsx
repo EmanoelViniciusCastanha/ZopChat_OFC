@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
       });
       
       if (login.status === 200) {
-        setUser(login.data.user as User);
+        setUser(login.data.user as User); // Aqui assumimos que o `user` vem na resposta
         return true;
       }
       return false;

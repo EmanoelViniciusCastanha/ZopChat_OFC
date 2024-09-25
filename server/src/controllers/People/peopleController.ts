@@ -7,7 +7,6 @@ import { Groups_Controller } from "../Groups/GroupController";
 import { peopleGroupController } from "../People_groups/peopleGroupController";
 export class PeopleController {
   static async createPeople(req: Request, res: Response) {
-    
     let IRegisterPeople: IRegisterPeople = req.body;
     try {
       const valideEmail = validator.validate(IRegisterPeople.email);
