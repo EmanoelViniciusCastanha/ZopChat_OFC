@@ -1,5 +1,4 @@
 import express from "express";
-import { AuthController } from "../controllers/auth/authController";
 import { groupMessagesController } from "../controllers/GroupMessages/groupMessagesController";
 
 const mensagemGrupoRoutes = express.Router();

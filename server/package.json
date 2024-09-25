@@ -14,7 +14,7 @@
     "@types/node": "^20.8.2",
     "nodemon": "^3.0.1",
     "prisma": "^5.4.1",
-    "ts-node": "^10.9.1",
+    "ts-node": "^10.9.2",
     "typescript": "^5.2.2"
   },
   "dependencies": {
@@ -28,7 +28,6 @@
     "email-validator": "^2.0.4",
     "express": "^4.21.0",
     "http": "^0.0.1-security",
-    "jsonwebtoken": "^9.0.2",
     "socket.io": "^4.7.2"
   }
 }
