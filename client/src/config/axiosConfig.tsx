@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const webFetch = axios.create({
-  baseURL: "http://localhost:5433",
+  baseURL: "localhost:3002",
   headers: {
     "Content-Type": "application/json",
   },

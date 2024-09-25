@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/auth/authContext";
 import { Image } from "@nextui-org/react";
 import { toast, Toaster } from "sonner";
-import { Eye, EyeOff } from "lucide-react"; // Import Lucide icons
+import { Eye, EyeOff } from "lucide-react";
 
 type FormData = {
   userEmail: string;
@@ -43,12 +43,12 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#16181D] space-x-12 select-none ">
-      <div className="bg-[#2E353B] shadow-md rounded-lg overflow-hidden w-[550px] h-[500px] select-none">
+    <div className="flex min-h-screen items-center justify-center bg-[#16181D] space-x-0 lg:space-x-12 select-none ">
+      <div className="bg-[#2E353B] shadow-md rounded-[0px] sm:rounded-lg overflow-hidden w-[550px] sm: select-none">
         <div className="p-8 w-full">
           <div className="pb-8">
-            <h1 className="text-3xl text-white pb-3 font-bold">Bem-vindo de Volta <span className="hand">👋</span></h1>
-            <span className="text-xs text-white font-normal pb-5">
+            <h1 className="text-[33px] sm:text-3xl text-white pb-3 font-bold">Bem-vindo de Volta <span className="hand">👋</span></h1>
+            <span className="text-[13px] sm:text-xs text-justify text-white font-normal pb-5">
               Sua comunicação empresarial nunca foi tão fácil. O Zopchat é a solução ideal para otimizar a colaboração entre equipes e melhorar o atendimento ao cliente.
             </span>
           </div>
@@ -99,13 +99,9 @@ const LoginForm = () => {
           </form>
         </div>
       </div>
-      <div className="block md:hidden bg-cover bg-center select-none">
-        <Image src="/src/Imagens/logo.png" />
-      </div>
-
       <div>
         <Toaster position="top-center" richColors />
-        <div className="hidden md:block bg-cover bg-center select-none w-[700px]">
+        <div className="hidden lg:block bg-cover bg-center select-none w-[700px]">
           <Image src="/src/Imagens/logo.png" />
         </div>
       </div>
